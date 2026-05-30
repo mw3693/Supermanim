@@ -557,12 +557,8 @@ class Scene:
                 mobjects_to_remove,
             )
 
-            def lambda_function(mesh: Object3D) -> bool:
-                return mesh not in set(meshes_to_remove)
-
-            self.meshes = list(
-                filter(lambda_function, self.meshes),
-            )
+            self.meshes = [mesh for mesh in self.meshes if mesh not in meshes_to_remove]
+            
             return self
         else:
             assert config.renderer == RendererType.CAIRO
